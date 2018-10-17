@@ -40,4 +40,10 @@ return [
         ],
     ],
 
+    'facebook' => [
+        'client_id' => env('1028827650653596'),         // Your GitHub Client ID
+        'client_secret' => env('e1e21b401e8b18248672568e293cd32f'), // Your GitHub Client Secret
+        'redirect' => 'http://localhost:8000/login/facebook/callback',
+    ],
+
 ];

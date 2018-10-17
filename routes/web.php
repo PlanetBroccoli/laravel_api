@@ -22,3 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/foo', function () {
     return 'Hello World';
 });
+
+Route::get('/privacy', function () {
+    return view('privacy');
+});

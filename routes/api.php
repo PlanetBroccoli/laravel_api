@@ -25,3 +25,6 @@ Route::resources([
     'images' => 'ImageController',
     'reports' => 'ReportController'
 ]);
+
+
+Route::get('/testS3', 'ImageController@testS3');

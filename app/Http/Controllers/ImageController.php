@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Image;
 use Illuminate\Http\Request;
+use Storage;
+use carbon\carbon;
 
 class ImageController extends Controller
 {
@@ -36,6 +38,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         //
+        return \GuzzleHttp\json_encode($request);
     }
 
     /**
@@ -81,5 +84,18 @@ class ImageController extends Controller
     public function destroy(Image $image)
     {
         //
+    }
+
+    public function testS3()
+    {
+        $my_file = 'file.txt';
+        $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
+        $data = 'Test data to see if this works!';
+        fwrite($handle, $data);
+        $filename = carbon::now()->format('YmdHis'). "_". "test";
+        Storage::disk('s3')->put($filename, $my_file, 'public');
+        $url = Storage::disk('s3')->url($filename);
+
+        return \GuzzleHttp\json_encode($url);
     }
 }

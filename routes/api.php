@@ -20,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/test', function (Request $request) {
     return 123;
 });
+
+Route::resources([
+    'images' => 'ImageController',
+    'reports' => 'ReportController'
+]);

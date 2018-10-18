@@ -19,6 +19,7 @@ class ImageController extends Controller
     public function index()
     {
         //
+        return \GuzzleHttp\json_encode(Image::all());
     }
 
     /**

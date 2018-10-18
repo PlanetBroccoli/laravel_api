@@ -88,12 +88,8 @@ class ImageController extends Controller
 
     public function testS3()
     {
-        $my_file = 'file.txt';
-        $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
-        $data = 'Test data to see if this works!';
-        fwrite($handle, $data);
-        $filename = carbon::now()->format('YmdHis'). "_". "test";
-        Storage::disk('s3')->put($filename, $my_file, 'public');
+        $filename = carbon::now()->format('YmdHis'). "_". "test.txt";
+        Storage::disk('s3')->put($filename, 'World', 'public');
         $url = Storage::disk('s3')->url($filename);
 
         return \GuzzleHttp\json_encode($url);

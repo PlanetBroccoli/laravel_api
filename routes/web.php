@@ -24,5 +24,5 @@ Route::get('/foo', function () {
 });
 
 Route::get('/privacy', function () {
-    return view('privacyj');
+    return view('privacy');
 });

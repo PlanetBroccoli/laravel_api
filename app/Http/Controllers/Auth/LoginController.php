@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
+//use Socialite;
+use Exception;
+//use Auth;
 
 class LoginController extends Controller
 {
@@ -52,10 +56,46 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
-        $user = Socialite::driver('facebook')->user();
+//        $user = Socialite::driver('facebook')->user();
+        try {
+//            $user = Socialite::driver($provider)->user();
+            $name = $request->name;
+//            $input['email'] = $request->email;
+//            $input['provider'] = 'facebook';
+//            $input['provider_id'] = 1;
+//            $provider_token = $request->token;
+//
+//            $authUser = $this->findOrCreate($input);
+//            Auth::loginUsingId($authUser->id);
+//
+//            return redirect()->route('home');
+            return json_encode($name);
+
+
+        } catch (Exception $e) {
+
+            return json_encode('error');
+
+//            return redirect('auth/'.$provider);
+
+        }
 
         // $user->token;
+
+        // return status, userID
     }
+
+//    public function findOrCreate($input){
+//        checkIfExist = User::where('provider',$input['provider'])
+//            ->where('provider_id',$input['provider_id'])
+//            ->first();
+//
+//        if($checkIfExist){
+//            return $checkIfExist;
+//        }
+//
+//        return User::create($input);
+//    }
 }

@@ -116,4 +116,15 @@ class MarkerController extends Controller
 
         return \GuzzleHttp\json_encode($markers);
     }
+
+    public function getAllMarkers()
+    {
+        $images = Image::select('url', 'latitude', 'longitude', 'url', 'created_at')->get();
+        $reports = Report::select('latitude', 'longitude', 'created_at')->get();
+
+        $result = ["images"=> $images, "reports" => $reports];
+
+        return \GuzzleHttp\json_encode($result);
+
+    }
 }

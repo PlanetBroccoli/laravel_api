@@ -31,3 +31,4 @@ Route::get('/testS3', 'ImageController@testS3');
 
 Route::post('/login/facebook/callback', 'Auth\SocialAuthController@handleProviderCallback');
 Route::post('/getNearMarker', 'MarkerController@getNearMarker');
+Route::post('/getAllMarkers', 'MarkerController@getAllMarkers');

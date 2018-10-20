@@ -89,13 +89,16 @@ class MarkerController extends Controller
 
     public function getNearMarker(Request $request)
     {
-        $markers = [];
+        $imgs = [];
+        $reps = [];
+
 
         $earthRadius = 6367000;
         $target_lat = ($request->latitude * pi() ) / 180;
         $target_lng = ($request->longitude * pi() ) / 180;
 
         $images = Image::all();
+        $reports = Report::all();
 //
         for ($i = 0; $i < count($images); $i++) {
             $lat = ($images[$i]->latitude * pi()) / 180;
@@ -108,11 +111,30 @@ class MarkerController extends Controller
             $calculatedDistance = $earthRadius * $stepTwo;
 
             if($calculatedDistance <= 200){
-                array_push($markers,$images[$i]);
+                array_push($imgs,$images[$i]);
 
             }
 
         }
+
+        for ($i = 0; $i < count($reports); $i++) {
+            $lat = ($reports[$i]->latitude * pi()) / 180;
+            $lng = ($reports[$i]->longitude * pi()) / 180;
+
+            $calcLatitude = $lat - $target_lat;
+            $calcLongitude = $lng - $target_lng;
+            $stepOne = pow(sin($calcLatitude / 2), 2) + cos($lat) * cos($target_lat) * pow(sin($calcLongitude / 2), 2);
+            $stepTwo = 2 * asin(min(1, sqrt($stepOne)));
+            $calculatedDistance = $earthRadius * $stepTwo;
+
+            if($calculatedDistance <= 200){
+                array_push($reps,$reports[$i]);
+
+            }
+
+        }
+
+        $markers = ["images"=> $imgs, "reports" => $reps];
 
         return \GuzzleHttp\json_encode($markers);
     }

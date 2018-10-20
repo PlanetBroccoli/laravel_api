@@ -65,11 +65,20 @@ class ImageController extends Controller
                     'created_at' => Carbon::now()
                 );
 
-                return \GuzzleHttp\json_encode($result =  DB::table('images')->insert($image));
+                try {
+                    $result = DB::table('reports')->insert($image);
+                    return response(["status"=>"success", "data"=>$result, "message"=>"ok"]);
+
+                } catch(\Illuminate\Database\QueryException $ex){
+
+                    return response(["status"=>"error", "data"=>null, "message"=>$ex->getMessage()]);
+
+
+                }
 //
             }
             else{
-                return \GuzzleHttp\json_encode("error");
+                return response(["error"=>"upload failed"]);
             }
         }
 //

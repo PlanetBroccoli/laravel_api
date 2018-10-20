@@ -106,12 +106,13 @@ class SocialAuthController extends Controller
             $input['provider_token'] = $request->token;
             $authUser = $this->findOrCreate($input);
 
-            return json_encode($authUser);
+
+            return response(["status"=>"success", "data"=>$authUser, "message"=>"ok"]);
 
 
-        } catch (Exception $e) {
+        } catch (\Illuminate\Database\QueryException $ex) {
 
-            return json_encode('error');
+            return response(["status"=>"error", "data"=>null, "message"=>$e->getMessage()]);
 
 
         }

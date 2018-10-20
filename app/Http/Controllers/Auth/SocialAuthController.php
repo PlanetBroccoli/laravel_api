@@ -102,8 +102,8 @@ class SocialAuthController extends Controller
             $input['name'] = $request->name;
             $input['email'] = $request->email;
             $input['provider'] = 'facebook';
-            $input['provider_id'] = 1;
-            $input['provider_token'] = $request->token;
+            $input['provider_id'] = $request->provider_id;
+            $input['provider_token'] = $request->provider_token;
             $authUser = $this->findOrCreate($input);
 
 
@@ -112,7 +112,7 @@ class SocialAuthController extends Controller
 
         } catch (\Illuminate\Database\QueryException $ex) {
 
-            return response(["status"=>"error", "data"=>null, "message"=>$e->getMessage()]);
+            return response(["status"=>"error", "data"=>null, "message"=>$ex->getMessage()]);
 
 
         }

@@ -59,6 +59,8 @@ class ImageController extends Controller
                     'userId' => $request->userId,
                     'latitude' => $request->latitude,
                     'longitude' => $request->longitude,
+                    'type' => $request->type,
+                    'description' => $request->description,
                     'url' => $filename,
                     'created_at' => Carbon::now()
                 );

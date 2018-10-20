@@ -108,7 +108,7 @@ class MarkerController extends Controller
             $calculatedDistance = $earthRadius * $stepTwo;
 
             if($calculatedDistance <= 200){
-                array_push($makers,$images[$i]);
+                array_push($markers,$images[$i]);
 
             }
 

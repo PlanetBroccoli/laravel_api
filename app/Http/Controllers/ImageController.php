@@ -66,7 +66,7 @@ class ImageController extends Controller
                 );
 
                 try {
-                    $result = DB::table('reports')->insert($image);
+                    $result = DB::table('images')->insert($image);
                     return response(["status"=>"success", "data"=>$result, "message"=>"ok"]);
 
                 } catch(\Illuminate\Database\QueryException $ex){

@@ -41,15 +41,19 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         //
+
         $this->validate($request, [
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
 
         if ($request->hasFile('file')) {
             $image = $request->file('file');
             $file = $image->getClientOriginalName();
 
             $filename = carbon::now()->format('YmdHis'). "_" . $file;
+
+
             if(Storage::disk('s3')->put($filename, file_get_contents($image), 'public')){
                 $image = array(
                     'userId' => $request->userId,
@@ -60,8 +64,9 @@ class ImageController extends Controller
                 );
 
                 return \GuzzleHttp\json_encode($result =  DB::table('images')->insert($image));
-
-            }else{
+//
+            }
+            else{
                 return \GuzzleHttp\json_encode("error");
             }
         }

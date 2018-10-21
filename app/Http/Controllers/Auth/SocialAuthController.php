@@ -100,7 +100,6 @@ class SocialAuthController extends Controller
 
         try {
             $input['name'] = $request->name;
-            $input['email'] = $request->email;
             $input['provider'] = 'facebook';
             $input['provider_id'] = $request->provider_id;
             $input['provider_token'] = $request->provider_token;
